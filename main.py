@@ -37,7 +37,7 @@ while looping:
     direction_to_choose = 0
     while  phrase in seen_phrases:
         if direction_to_choose == 0:
-            direction_to_choose = input('To generate a random name would you like to fuzz(1) or train the model(2)')
+            direction_to_choose = str(input('To generate a random name would you like to fuzz(1) or train the model(2)'))
 
             while direction_to_choose !='1' or direction_to_choose!='2':
                 direction_to_choose = input('To generate a random name would you like to fuzz(1) or train the model(2)')

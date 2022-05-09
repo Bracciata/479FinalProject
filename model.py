@@ -2,7 +2,7 @@ from __future__ import print_function
 from cProfile import label
 from ctypes import util
 from tensorflow.keras.optimizers import RMSprop
-
+import pydot
 import numpy as np                 # to use numpy arrays
 import tensorflow as tf            # to specify and run computation graphs
 import tensorflow_datasets as tfds  # to load training data
@@ -33,6 +33,9 @@ class Model:
             loss='sparse_categorical_crossentropy',
             optimizer=RMSprop(lr=0.01)
         )
+        dot_img_file = 'tmp/model_1.png'
+
+        tf.keras.utils.plot_model(self.model, to_file=dot_img_file, show_shapes=True)
 
         self.model.summary()
         # code from tensorflow to save model
@@ -54,7 +57,7 @@ class Model:
             validation_data=(x_test, y_test), epochs=epochs,
             callbacks=[
                 tf.keras.callbacks.EarlyStopping(
-                    monitor='val_accuracy', patience=5), self.checkpoint_callback
+                    monitor='val_loss', patience=5), self.checkpoint_callback
             ]
         )
 
